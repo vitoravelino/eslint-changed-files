@@ -9,7 +9,7 @@ if [[ -z $GITHUB_BASE_REF ]]; then
   exit 0;
 fi
 
-curl -sf -o ./formatter.js https://raw.githubusercontent.com/reviewdog/action-eslint/master/eslint-formatter-rdjson/index.js 
+curl -sf -o ./formatter.js https://raw.githubusercontent.com/reviewdog/action-eslint/master/eslint-formatter-rdjson/index.js
 
 ESLINT_FORMATTER="./formatter.js"
 GITHUB_TOKEN=$INPUT_TOKEN
@@ -138,12 +138,12 @@ else
       fi
       echo "::endgroup::"
 
+      git remote remove temp_eslint_changed_files
+
       if [[ $exit_status -ne 0 ]]; then
         echo "::warning::Error running eslint."
-        exit 0;
+        exit 1;
       fi
-      
-      git remote remove temp_eslint_changed_files
     fi
   else
     echo "Skipping: No files to lint"
